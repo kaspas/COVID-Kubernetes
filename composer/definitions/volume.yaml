@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: covid-chestxray-dataset
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/node1/Desktop/composer/covid-chestxray-dataset"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: covid-chestxray-dataset-claim
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

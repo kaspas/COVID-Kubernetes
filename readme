@@ -1,0 +1,5 @@
+το dockerfile έξω απ το compose είναι για το ubuntu που χρησιμοποιήται στο pull cronjob
+το dockerfile μέσα στο compose είναι για το image του website
+στο definitions έχει τα yaml για deployment,service, volume
+στο cron το yaml για το cronjob u1:v1 ήταν το build του ubuntu με git.
+και θέλει μέσα στο compose git clone https://github.com/ieee8023/covid-chestxray-dataset

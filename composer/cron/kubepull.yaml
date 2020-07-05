@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: pull
+spec:
+  schedule: "*/8 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pull
+            image: ul:v1
+            args:
+            - /bin/sh
+            - -c
+            - cd /mnt/ && git pull origin master && echo This is the end
+            volumeMounts:
+            - name: covid-chestxray-dataset
+              mountPath: "/mnt/"
+          restartPolicy: OnFailure
+          volumes: 
+            - name: covid-chestxray-dataset
+              persistentVolumeClaim:
+                claimName: covid-chestxray-dataset-claim
+
+

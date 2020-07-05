@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-deployment
+  labels:
+    app: website
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+      - name: php-web
+        image: web:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: covid-chestxray-dataset
+          mountPath: /var/www/html/covid-chestxray-dataset
+      volumes: 
+      - name: covid-chestxray-dataset
+        persistentVolumeClaim:
+          claimName: covid-chestxray-dataset-claim
+
+
+
